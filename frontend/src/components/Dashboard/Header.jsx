@@ -1,0 +1,67 @@
+import { useState } from 'react';
+import { MagnifyingGlassIcon, BellIcon, UserCircleIcon } from '@heroicons/react/24/outline';
+
+export default function Header({ setSidebarOpen }) {
+  const [searchQuery, setSearchQuery] = useState('');
+
+  return (
+    <div className="sticky top-0 z-10 flex h-16 flex-shrink-0 bg-white shadow">
+      <button
+        type="button"
+        className="border-r border-gray-200 px-4 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 lg:hidden"
+        onClick={() => setSidebarOpen(true)}
+      >
+        <span className="sr-only">Open sidebar</span>
+        <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" aria-hidden="true">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+        </svg>
+      </button>
+      <div className="flex flex-1 justify-between px-4">
+        <div className="flex flex-1">
+          <div className="flex w-full max-w-lg lg:max-w-xs">
+            <label htmlFor="search" className="sr-only">Search</label>
+            <div className="relative">
+              <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                <MagnifyingGlassIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
+              </div>
+              <input
+                id="search"
+                name="search"
+                className="block w-full rounded-md border-0 bg-white py-1.5 pl-10 pr-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                placeholder="Search"
+                type="search"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+            </div>
+          </div>
+        </div>
+        <div className="ml-4 flex items-center lg:ml-6">
+          <button
+            type="button"
+            className="rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+          >
+            <span className="sr-only">View notifications</span>
+            <BellIcon className="h-6 w-6" aria-hidden="true" />
+          </button>
+
+          {/* Profile dropdown */}
+          <div className="relative ml-3">
+            <div>
+              <button
+                type="button"
+                className="flex max-w-xs items-center rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                id="user-menu-button"
+                aria-expanded="false"
+                aria-haspopup="true"
+              >
+                <span className="sr-only">Open user menu</span>
+                <UserCircleIcon className="h-8 w-8 text-gray-400" aria-hidden="true" />
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
